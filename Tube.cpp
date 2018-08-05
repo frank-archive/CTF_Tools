@@ -56,6 +56,7 @@ std::string pwn::RemoteSession::recieve(int bytes, time_t timeout){
 		delete buffer;
 		tlog.info("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
+		return std::string();
 	}
 	tlog.debug("data recieved %d bytes\n", recieved_bytes);
 	string message = buffer; delete buffer;
@@ -77,6 +78,7 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 	if (recv_ret == SOCKET_ERROR) {
 		tlog.info("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
+		return std::string();
 	}
 	tlog.debug("data recieved %d btyes\n", recieved_bytes);
 	return message;

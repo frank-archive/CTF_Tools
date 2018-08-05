@@ -33,7 +33,7 @@ namespace pwn {
 
 		void close();
 	};
-	class Listen_Session :public Tube {
+	class Listen_Session {
 
 	};
 	RemoteSession remote(std::string addr, int port);
