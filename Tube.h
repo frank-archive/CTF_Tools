@@ -3,22 +3,7 @@
 #include<WinSock2.h>
 #pragma comment(lib,"Ws2_32.lib ")
 namespace pwn {
-
-	class Tube {
-	public:
-		void interactive() {}
-
-		std::string recieve(int bytes = 4096, time_t timeout = 200) { return std::string(); }
-		std::string recvall() { return std::string(); }
-		std::string recvline(bool keepends = true) { return std::string(); }
-		std::string recvuntil(std::string pattern, bool drop) { return std::string(); }
-
-		void send(std::string data) {}
-		void sendline(std::string data) {}
-
-		void close() {}
-	};
-	class RemoteSession :public Tube {
+	class RemoteSession {
 		SOCKET sock;
 	public:
 		RemoteSession(std::string host, int port);
@@ -35,7 +20,7 @@ namespace pwn {
 
 		void close();
 	};
-	class ProcessSession :public Tube {
+	class ProcessSession {
 		void interactive();
 
 		std::string recieve(int bytes = 4096, time_t timeout = 200);
