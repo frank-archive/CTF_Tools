@@ -11,10 +11,10 @@ pwn::RemoteSession::RemoteSession(std::string host, int port) {
 	if (WSAStarted == false)
 		WSAStartup(MAKEWORD(2, 2), &w_data), WSAStarted = true;
 
-	sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	sock = socket(AF_INET, SOCK_STREAM, 0);
 	SOCKADDR_IN addrServ;
 	addrServ.sin_family = AF_INET;
-	addrServ.sin_port = port;
+	addrServ.sin_port = htons(port);
 
 	hostent *hostInfo = gethostbyname(host.c_str());
 	if (hostInfo == NULL) {
@@ -22,7 +22,12 @@ pwn::RemoteSession::RemoteSession(std::string host, int port) {
 		RemoteSession::~RemoteSession();
 		return;
 	}
-	addrServ.sin_addr = *((IN_ADDR*)hostInfo->h_addr);
+	memcpy(&addrServ.sin_addr, hostInfo->h_addr_list[0], 4);
+	if (connect(sock, (SOCKADDR*)&addrServ, sizeof(addrServ)) == SOCKET_ERROR) {
+		RemoteSession::~RemoteSession();
+		tlog.error("connect failed...destructing\n");
+		return;
+	}
 	tlog.success("Open connection to %s on port %d done\n", host.c_str(), port);
 }
 
@@ -59,6 +64,7 @@ std::string pwn::RemoteSession::recieve(int bytes, time_t timeout){
 		return std::string();
 	}
 	tlog.debug("data recieved %d bytes\n", recieved_bytes);
+	buffer[recieved_bytes] = 0;
 	string message = buffer; delete buffer;
 	return message;
 }
@@ -71,6 +77,7 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 	char buffer[4096]; memset(buffer, 0, sizeof buffer);
 	int recieved_bytes = 0; std::string message; int recv_ret;
 	while ((recv_ret = recv(sock, buffer, 4095, 0)) > 0) {
+		buffer[recv_ret] = 0;
 		message += buffer; recieved_bytes += recv_ret;
 		memset(buffer, 0, sizeof buffer);
 	}

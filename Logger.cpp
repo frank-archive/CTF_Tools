@@ -1,7 +1,7 @@
 #include "Logger.h"
 
 void Logger::v_log(LogLevel level, const char * fmt, va_list list){
-	if (this->level < level)return;
+	if (this->level > level)return;
 	vprintf(fmt, list);
 }
 
@@ -60,7 +60,7 @@ void Logger::error(const char * fmt, ...){
 }
 
 void Logger::_log(LogLevel level, const char * fmt, ...){
-	if (this->level < level)return;
+	if (this->level > level)return;
 	va_list list;
 	va_start(list, fmt);
 	printf(fmt, list);
