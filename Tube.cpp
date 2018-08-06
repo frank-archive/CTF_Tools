@@ -93,12 +93,28 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 
 std::string pwn::RemoteSession::recvline(bool keepends) {
 	Logger tlog; tlog.debug("recieving a line of data\n");
+	char buffer;int recv_ret;string message;
+	while((recv_ret = recv(sock,&buffer,1,0))>0){
+		if(buffer=='\n')break;
+		message+=buffer;
+	}
+	if(recv_ret==SOCKET_ERROR){
+		tlog.info("connection closed by server...destructing\n");
+		RemoteSession::~RemoteSession();
+		return std::string();
+	}
 	
-	return std::string();
+	if(keepends)message+='\n';
+	return message;
 }
 
 void pwn::RemoteSession::sendline(std::string data) {
-
+	if(data[data.size()-1]!='\n')data+='\n';
+	if(::send(sock,data.c_str(),data.size(),0)==SOCKET_ERROR){
+		tlog.info("connection closed by server...destructing\n");
+		RemoteSession::~RemoteSession();
+		return std::string();
+	}
 }
 
 pwn::RemoteSession pwn::remote(std::string addr, int port) {
