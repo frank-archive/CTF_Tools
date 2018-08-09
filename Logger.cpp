@@ -1,4 +1,7 @@
 #include "Logger.h"
+#include<vector>
+
+std::vector<std::string>error_log;
 
 void Logger::v_log(LogLevel level, const char * fmt, va_list list){
 	if (this->level > level)return;
@@ -53,8 +56,11 @@ void Logger::info(const char * fmt, ...) {
 
 void Logger::error(const char * fmt, ...){
 	_log(ERROR, "[ERROR] ");
+	char buffer[2048];
 	va_list list;
 	va_start(list, fmt);
+	vsprintf(buffer, fmt, list);
+	error_log.push_back(buffer);
 	v_log(ERROR, fmt, list);
 	va_end(list);
 }

@@ -49,17 +49,17 @@ void pwn::RemoteSession::interactive() {
 	}
 }
 
-std::string pwn::RemoteSession::recieve(int bytes, time_t timeout){
+std::string pwn::RemoteSession::recv(int bytes, time_t timeout){
 	Logger tlog; tlog.debug("recieving data\n");
 	if (timeout != 0)//set socket recv timeout
 		setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
 
 	char *buffer = new char[bytes]; memset(buffer, 0, sizeof buffer);
 	int recieved_bytes;
-	if ((recieved_bytes = recv(sock, buffer, bytes - 1, 0))
+	if ((recieved_bytes = ::recv(sock, buffer, bytes - 1, 0))
 		== SOCKET_ERROR) {
 		delete buffer;
-		tlog.info("connection closed by server...destructing\n");
+		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
 		return std::string();
 	}
@@ -76,14 +76,14 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 
 	char buffer[4096]; memset(buffer, 0, sizeof buffer);
 	int recieved_bytes = 0; std::string message; int recv_ret;
-	while ((recv_ret = recv(sock, buffer, 4095, 0)) > 0) {
+	while ((recv_ret = ::recv(sock, buffer, 4095, 0)) > 0) {
 		buffer[recv_ret] = 0;
 		message += buffer; recieved_bytes += recv_ret;
 		memset(buffer, 0, sizeof buffer);
 	}
 	delete buffer;
 	if (recv_ret == SOCKET_ERROR) {
-		tlog.info("connection closed by server...destructing\n");
+		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
 		return std::string();
 	}
@@ -93,28 +93,31 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 
 std::string pwn::RemoteSession::recvline(bool keepends) {
 	Logger tlog; tlog.debug("recieving a line of data\n");
-	char buffer;int recv_ret;string message;
-	while((recv_ret = recv(sock,&buffer,1,0))>0){
-		if(buffer=='\n')break;
-		message+=buffer;
+	char buffer; int recv_ret; string message;
+	while ((recv_ret = ::recv(sock, &buffer, 1, 0)) > 0) {
+		if (buffer == '\n')break;
+		message += buffer;
 	}
-	if(recv_ret==SOCKET_ERROR){
-		tlog.info("connection closed by server...destructing\n");
+	if (recv_ret == SOCKET_ERROR) {
+		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
 		return std::string();
 	}
-	
-	if(keepends)message+='\n';
+	tlog.debug("data recieved %d btyes\n", message.size());
+	if (keepends)message += '\n';
 	return message;
 }
 
 void pwn::RemoteSession::sendline(std::string data) {
+	Logger tlog; tlog.debug("sending a line of data\n");
 	if(data[data.size()-1]!='\n')data+='\n';
 	if(::send(sock,data.c_str(),data.size(),0)==SOCKET_ERROR){
-		tlog.info("connection closed by server...destructing\n");
+		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
-		return std::string();
+		return;
 	}
+	tlog.debug("message sent\n");
+	return;
 }
 
 pwn::RemoteSession pwn::remote(std::string addr, int port) {

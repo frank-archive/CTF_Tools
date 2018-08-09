@@ -10,7 +10,7 @@ namespace pwn {
 		~RemoteSession();
 		void interactive();
 
-		std::string recieve(int bytes = 4096, time_t timeout = 0);
+		std::string recv(int bytes = 4096, time_t timeout = 0);
 		std::string recvall(time_t timeout = 0);
 		std::string recvline(bool keepends = true);
 		std::string recvuntil(std::string pattern, bool drop);
@@ -23,7 +23,7 @@ namespace pwn {
 	class ProcessSession {
 		void interactive();
 
-		std::string recieve(int bytes = 4096, time_t timeout = 200);
+		std::string recv(int bytes = 4096, time_t timeout = 200);
 		std::string recvall();
 		std::string recvline(bool keepends = true);
 		std::string recvuntil(std::string pattern, bool drop);
