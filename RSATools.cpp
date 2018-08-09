@@ -27,8 +27,8 @@ PUBKEY parsePublicKey(std::string pubkey) {
 	Logger tlog; tlog.debug("requesting PUBKEY parse\n");
 	RemoteSession a = remote("service.std-frank.club", 7456);
 	a.sendline(std::string("pub ") + pubkey);
-	std::string ret = a.recvall();
+	std::string ret_str = a.recvall();
 	tlog.debug("request sent\n");
 	PUBKEY ret;
-	ret
+	
 }

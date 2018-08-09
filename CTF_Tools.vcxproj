@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BigTypes.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RSATools.cpp" />
@@ -30,7 +31,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="context.h" />
+    <ClInclude Include="BigTypes.h" />
     <ClInclude Include="RSATools.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />

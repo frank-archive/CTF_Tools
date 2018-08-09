@@ -23,7 +23,7 @@ namespace pwn {
 	class ProcessSession {
 		void interactive();
 
-		std::string recv(int bytes = 4096, time_t timeout = 200);
+		std::string recv(int bytes = 4096);
 		std::string recvall();
 		std::string recvline(bool keepends = true);
 		std::string recvuntil(std::string pattern, bool drop);
