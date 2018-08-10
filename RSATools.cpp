@@ -29,6 +29,5 @@ PUBKEY parsePublicKey(std::string pubkey) {
 	a.sendline(std::string("pub ") + pubkey);
 	std::string ret_str = a.recvall();
 	tlog.debug("request sent\n");
-	PUBKEY ret;
-	
+	return PUBKEY();
 }
