@@ -80,8 +80,8 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 		buffer[recv_ret] = 0;
 		message += buffer; recieved_bytes += recv_ret;
 		memset(buffer, 0, sizeof buffer);
+		if (recv_ret < 4095)break;
 	}
-	delete buffer;
 	if (recv_ret == SOCKET_ERROR) {
 		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
@@ -108,15 +108,22 @@ std::string pwn::RemoteSession::recvline(bool keepends) {
 	return message;
 }
 
-void pwn::RemoteSession::sendline(std::string data) {
-	Logger tlog; tlog.debug("sending a line of data\n");
-	if(data[data.size()-1]!='\n')data+='\n';
-	if(::send(sock,data.c_str(),data.size(),0)==SOCKET_ERROR){
+void pwn::RemoteSession::send(std::string data){
+	Logger tlog; tlog.debug("sending data\n");
+	if (::send(sock, data.c_str(), data.size(), 0) == SOCKET_ERROR) {
 		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
 		return;
 	}
 	tlog.debug("message sent\n");
+	return;
+}
+
+void pwn::RemoteSession::sendline(std::string data) {
+	Logger tlog; tlog.debug("sending a line of data\n");
+	if(data[data.size()-1]!='\n')data+='\n';
+	tlog.debug("calling send function\n");
+	send(data);
 	return;
 }
 

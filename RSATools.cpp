@@ -22,12 +22,13 @@ Modulus=DD3FC72AEF7E84BBAF571F72A7881A330F4772ADA7D6E43FBC29C5A1AC4A4CF8D279C31D
 */
 
 //please erase the line breaks before calling this function
-
+#include<iostream>
 PUBKEY parsePublicKey(std::string pubkey) {
 	Logger tlog; tlog.debug("requesting PUBKEY parse\n");
 	RemoteSession a = remote("service.std-frank.club", 7456);
 	a.sendline(std::string("pub ") + pubkey);
+	tlog.debug("request sent...recving...\n");
 	std::string ret_str = a.recvall();
-	tlog.debug("request sent\n");
+	std::cout << ret_str;
 	return PUBKEY();
 }
