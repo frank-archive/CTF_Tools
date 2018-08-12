@@ -5,7 +5,7 @@
 using namespace std;
 bool WSAStarted;
 WSADATA w_data;
-pwn::RemoteSession::RemoteSession(std::string host, int port) {
+RemoteSession::RemoteSession(std::string host, int port) {
 	Logger tlog;
 	tlog.progress("Opening connection to %s on port %d\n", host.c_str(), port);
 	if (WSAStarted == false)
@@ -31,13 +31,13 @@ pwn::RemoteSession::RemoteSession(std::string host, int port) {
 	tlog.success("Open connection to %s on port %d done\n", host.c_str(), port);
 }
 
-pwn::RemoteSession::~RemoteSession() {
+RemoteSession::~RemoteSession() {
 	if (WSAStarted == true)
 		WSACleanup(), WSAStarted = false;
 	closesocket(sock);
 }
 
-void pwn::RemoteSession::interactive() {
+void RemoteSession::interactive() {
 	cout << ("--------------\nentering remote interactive mode...\ninput \'exit\' to exit(\'exit\'will be sent too\n\n");
 	std::string data;
 	while (1) {
@@ -49,7 +49,7 @@ void pwn::RemoteSession::interactive() {
 	}
 }
 
-std::string pwn::RemoteSession::recv(int bytes, time_t timeout){
+std::string RemoteSession::recv(int bytes, time_t timeout){
 	Logger tlog; tlog.debug("recieving data\n");
 	if (timeout != 0)//set socket recv timeout
 		setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
@@ -69,7 +69,7 @@ std::string pwn::RemoteSession::recv(int bytes, time_t timeout){
 	return message;
 }
 
-std::string pwn::RemoteSession::recvall(time_t timeout) {
+std::string RemoteSession::recvall(time_t timeout) {
 	Logger tlog; tlog.debug("recieving all data\n");
 	if (timeout != 0)
 		setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
@@ -91,7 +91,7 @@ std::string pwn::RemoteSession::recvall(time_t timeout) {
 	return message;
 }
 
-std::string pwn::RemoteSession::recvline(bool keepends) {
+std::string RemoteSession::recvline(bool keepends) {
 	Logger tlog; tlog.debug("recieving a line of data\n");
 	char buffer; int recv_ret; string message;
 	while ((recv_ret = ::recv(sock, &buffer, 1, 0)) > 0) {
@@ -108,7 +108,7 @@ std::string pwn::RemoteSession::recvline(bool keepends) {
 	return message;
 }
 
-void pwn::RemoteSession::send(std::string data){
+void RemoteSession::send(std::string data){
 	Logger tlog; tlog.debug("sending data\n");
 	if (::send(sock, data.c_str(), data.size(), 0) == SOCKET_ERROR) {
 		tlog.error("connection closed by server...destructing\n");
@@ -119,7 +119,7 @@ void pwn::RemoteSession::send(std::string data){
 	return;
 }
 
-void pwn::RemoteSession::sendline(std::string data) {
+void RemoteSession::sendline(std::string data) {
 	Logger tlog; tlog.debug("sending a line of data\n");
 	if(data[data.size()-1]!='\n')data+='\n';
 	tlog.debug("calling send function\n");
@@ -127,6 +127,6 @@ void pwn::RemoteSession::sendline(std::string data) {
 	return;
 }
 
-pwn::RemoteSession pwn::remote(std::string addr, int port) {
+RemoteSession remote(std::string addr, int port) {
 	return RemoteSession(addr, port);
 }

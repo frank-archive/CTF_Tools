@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BigTypes.cpp" />
+    <ClCompile Include="CaesarCipher.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RSACipherExamples.cpp" />
     <ClCompile Include="RSATools.cpp" />
     <ClCompile Include="Tube.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -29,14 +31,18 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="TubeExamples.cpp" />
+    <ClCompile Include="UrlEncode.cpp" />
+    <ClCompile Include="BigTypesExample.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseEncoding.h" />
+    <ClInclude Include="BaseEncode.h" />
     <ClInclude Include="BigTypes.h" />
-    <ClInclude Include="FenceCipher.h" />
+    <ClInclude Include="CaesarCipher.h" />
     <ClInclude Include="RSACipher.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="UrlEncode.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

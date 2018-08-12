@@ -13,11 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="头文件\CRYPTO">
-      <UniqueIdentifier>{9d5f45b2-8dbe-4153-91a6-45e5f28b5035}</UniqueIdentifier>
-    </Filter>
     <Filter Include="源文件\libcpp">
       <UniqueIdentifier>{33a494a5-d1f0-4007-be26-6a05a4e24848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MISC">
+      <UniqueIdentifier>{9d5f45b2-8dbe-4153-91a6-45e5f28b5035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\PWN">
+      <UniqueIdentifier>{b62978e1-8ce0-4d3f-8eca-abd99535691e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Examples">
+      <UniqueIdentifier>{0bbe2699-2d6a-470c-b3e7-5266a34faeef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,25 +42,43 @@
     <ClCompile Include="Tube.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
+    <ClCompile Include="CaesarCipher.cpp">
+      <Filter>源文件\libcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UrlEncode.cpp">
+      <Filter>源文件\libcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BigTypesExample.cpp">
+      <Filter>源文件\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="RSACipherExamples.cpp">
+      <Filter>源文件\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="TubeExamples.cpp">
+      <Filter>源文件\Examples</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Tube.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="BigTypes.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FenceCipher.h">
-      <Filter>头文件\CRYPTO</Filter>
+    <ClInclude Include="BaseEncode.h">
+      <Filter>头文件\MISC</Filter>
     </ClInclude>
-    <ClInclude Include="BaseEncoding.h">
-      <Filter>头文件\CRYPTO</Filter>
+    <ClInclude Include="CaesarCipher.h">
+      <Filter>头文件\MISC</Filter>
     </ClInclude>
     <ClInclude Include="RSACipher.h">
-      <Filter>头文件\CRYPTO</Filter>
+      <Filter>头文件\MISC</Filter>
+    </ClInclude>
+    <ClInclude Include="Tube.h">
+      <Filter>头文件\PWN</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlEncode.h">
+      <Filter>头文件\MISC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
