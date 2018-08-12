@@ -31,8 +31,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseEncoding.h" />
     <ClInclude Include="BigTypes.h" />
-    <ClInclude Include="RSATools.h" />
+    <ClInclude Include="FenceCipher.h" />
+    <ClInclude Include="RSACipher.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />
   </ItemGroup>

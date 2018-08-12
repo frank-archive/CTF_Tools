@@ -13,28 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\CRYPTO">
+      <UniqueIdentifier>{9d5f45b2-8dbe-4153-91a6-45e5f28b5035}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\libcpp">
+      <UniqueIdentifier>{33a494a5-d1f0-4007-be26-6a05a4e24848}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Tube.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="BigTypes.cpp">
+      <Filter>源文件\libcpp</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\libcpp</Filter>
     </ClCompile>
     <ClCompile Include="RSATools.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\libcpp</Filter>
     </ClCompile>
-    <ClCompile Include="BigTypes.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="Tube.cpp">
+      <Filter>源文件\libcpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RSATools.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Tube.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -43,6 +46,15 @@
     </ClInclude>
     <ClInclude Include="BigTypes.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FenceCipher.h">
+      <Filter>头文件\CRYPTO</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEncoding.h">
+      <Filter>头文件\CRYPTO</Filter>
+    </ClInclude>
+    <ClInclude Include="RSACipher.h">
+      <Filter>头文件\CRYPTO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

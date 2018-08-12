@@ -33,5 +33,5 @@ void RSAExamples() {
 	cout << a.modulus.toString();
 }
 int main() {
-	RSAExamples();
+	
 }
