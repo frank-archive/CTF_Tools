@@ -1,5 +1,6 @@
 #pragma once
 #include<string>
+//开个python很难么Orz
 std::string b64encode(std::string txt);
 std::string b64decode(std::string enc);
 

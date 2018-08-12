@@ -1,8 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include"RSATools.h"
+#include"RSACipher.h"
 #include"Tube.h"
 #include"Logger.h"
-using namespace pwn;
 
 //MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdP8cq736Eu69XH3KniBozD0dyrafW5D+8KcWhrEpM+NJ5wx2uWRTHTxzgHUMqfTwveBNaWM7ayQbUhatqZYDeJQGrpexp+N46C9nYV3kUmi9SFe8w3JOy6VBFw6s/zP2OGWwGMeZ5AcxIprevnwVHAwdqjYKGm9/s2zIOaOPA7QIDAQAB
 

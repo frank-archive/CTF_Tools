@@ -36,9 +36,6 @@
     <ClCompile Include="Logger.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
-    <ClCompile Include="RSATools.cpp">
-      <Filter>源文件\libcpp</Filter>
-    </ClCompile>
     <ClCompile Include="Tube.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
@@ -56,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="TubeExamples.cpp">
       <Filter>源文件\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="FormatStringBuilder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RSACipher.cpp">
+      <Filter>源文件\libcpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="UrlEncode.h">
       <Filter>头文件\MISC</Filter>
+    </ClInclude>
+    <ClInclude Include="FormatStringBuilder.h">
+      <Filter>头文件\PWN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

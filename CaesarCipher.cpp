@@ -11,6 +11,7 @@ std::string Caesar::roll(int key){
 			(text[i] >= 'A' + key) && (text[i] <= 'Z' + key) && (text[i] < 'A'))
 			text[i] += 26;
 	}
+	return text;
 }
 
 Caesar::Caesar(std::string txt) :text(txt) {}
@@ -31,4 +32,4 @@ std::string Caesar::operator-=(int bias) {
 	return roll(-bias);
 }
 
-std::string Caesar::operator=(std::string txt) { text = txt; }
+std::string Caesar::operator=(std::string txt) { text = txt; return text; }

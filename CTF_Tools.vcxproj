@@ -21,10 +21,11 @@
   <ItemGroup>
     <ClCompile Include="BigTypes.cpp" />
     <ClCompile Include="CaesarCipher.cpp" />
+    <ClCompile Include="FormatStringBuilder.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RSACipherExamples.cpp" />
-    <ClCompile Include="RSATools.cpp" />
+    <ClCompile Include="RSACipher.cpp" />
     <ClCompile Include="Tube.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -39,6 +40,7 @@
     <ClInclude Include="BaseEncode.h" />
     <ClInclude Include="BigTypes.h" />
     <ClInclude Include="CaesarCipher.h" />
+    <ClInclude Include="FormatStringBuilder.h" />
     <ClInclude Include="RSACipher.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />
