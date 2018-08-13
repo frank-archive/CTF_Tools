@@ -38,3 +38,21 @@ PUBKEY parsePublicKey(std::string pubkey) {
 			ret_str.find("---") - ret_str.find("Modulus=") - 8), 16);
 	return ret;
 }
+#include<iostream>
+std::pair<BigInteger, BigInteger> factorize(BigInteger a) {
+	std::string url = "www.factordb.com";
+	RemoteSession factordb = remote(url, 80);
+	std::string query = "GET /index.php?query=";
+	query += a.toString();
+	query += " HTTP/1.1\r\nHost: factordb.com\r\nAccept: text\r\nConnection: Close\r\n\r\n";
+	factordb.send(query);
+	std::string meta = factordb.recv();
+	return std::pair<BigInteger, BigInteger>(
+		meta.substr(
+
+		),
+		meta.substr(
+
+		)
+	);
+}

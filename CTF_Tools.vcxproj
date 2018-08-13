@@ -22,6 +22,7 @@
     <ClCompile Include="BigTypes.cpp" />
     <ClCompile Include="CaesarCipher.cpp" />
     <ClCompile Include="FormatStringBuilder.cpp" />
+    <ClCompile Include="HTTPToolkit.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RSACipherExamples.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="BigTypes.h" />
     <ClInclude Include="CaesarCipher.h" />
     <ClInclude Include="FormatStringBuilder.h" />
+    <ClInclude Include="HTTPToolkit.h" />
     <ClInclude Include="RSACipher.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />

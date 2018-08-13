@@ -1,6 +1,7 @@
 #pragma once
 //this part relies on my vps, therefore unreliable
 #include<string>
+#include<utility>
 #include"BigTypes.h"
 struct PRIVKEY {
 	//bool version;//don't (want to) support multi modulus
@@ -16,6 +17,8 @@ struct PUBKEY {
 };
 PUBKEY parsePublicKey(std::string pubkey);
 PRIVKEY parsePrivateKey(std::string privkey);
+
+std::pair<BigInteger,BigInteger> factorize(BigInteger a);
 
 void RSAencode(FILE *file, PUBKEY key);
 void RSAencode(FILE *file, std::string key);

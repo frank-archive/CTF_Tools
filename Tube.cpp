@@ -127,6 +127,11 @@ void RemoteSession::sendline(std::string data) {
 	return;
 }
 
+void RemoteSession::close() {
+	Logger tlog;
+	tlog.info("you actually needn't call this function...\n");
+}
+
 RemoteSession remote(std::string addr, int port) {
 	return RemoteSession(addr, port);
 }

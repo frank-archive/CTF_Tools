@@ -25,6 +25,9 @@
     <Filter Include="源文件\Examples">
       <UniqueIdentifier>{0bbe2699-2d6a-470c-b3e7-5266a34faeef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\WEB">
+      <UniqueIdentifier>{1c107406-f0cd-4253-8932-34630308e6fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +63,9 @@
     <ClCompile Include="RSACipher.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
+    <ClCompile Include="HTTPToolkit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logger.h">
@@ -77,14 +83,17 @@
     <ClInclude Include="RSACipher.h">
       <Filter>头文件\MISC</Filter>
     </ClInclude>
-    <ClInclude Include="Tube.h">
-      <Filter>头文件\PWN</Filter>
-    </ClInclude>
     <ClInclude Include="UrlEncode.h">
       <Filter>头文件\MISC</Filter>
     </ClInclude>
     <ClInclude Include="FormatStringBuilder.h">
       <Filter>头文件\PWN</Filter>
+    </ClInclude>
+    <ClInclude Include="Tube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HTTPToolkit.h">
+      <Filter>头文件\WEB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
