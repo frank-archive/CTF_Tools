@@ -4,6 +4,7 @@
 #pragma comment(lib,"Ws2_32.lib ")
 class RemoteSession {
 	SOCKET sock;
+	bool closed;
 public:
 	RemoteSession(std::string host, int port);
 	~RemoteSession();
@@ -18,6 +19,7 @@ public:
 	void sendline(std::string data);
 
 	void close();
+	bool isClosed();
 };
 class ProcessSession {
 	void interactive();

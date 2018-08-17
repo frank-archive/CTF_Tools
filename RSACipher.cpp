@@ -2,6 +2,10 @@
 #include"RSACipher.h"
 #include"Tube.h"
 #include"Logger.h"
+#include"HTTPToolkit.h"
+#include<regex>
+#include<vector>
+using namespace std;
 
 //MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdP8cq736Eu69XH3KniBozD0dyrafW5D+8KcWhrEpM+NJ5wx2uWRTHTxzgHUMqfTwveBNaWM7ayQbUhatqZYDeJQGrpexp+N46C9nYV3kUmi9SFe8w3JOy6VBFw6s/zP2OGWwGMeZ5AcxIprevnwVHAwdqjYKGm9/s2zIOaOPA7QIDAQAB
 
@@ -22,12 +26,14 @@ Modulus=DD3FC72AEF7E84BBAF571F72A7881A330F4772ADA7D6E43FBC29C5A1AC4A4CF8D279C31D
 */
 
 //please erase the line breaks before calling this function
-PUBKEY parsePublicKey(std::string pubkey) {
+PUBKEY parsePublicKey(string pubkey) {
+	string p, q;
+
 	Logger tlog; tlog.debug("requesting PUBKEY parse\n");
 	RemoteSession a = remote("service.std-frank.club", 7456);
-	a.sendline(std::string("pub ") + pubkey);
+	a.sendline(string("pub ") + pubkey);
 	tlog.debug("request sent...recving...\n");
-	std::string ret_str = a.recvall();
+	string ret_str = a.recvall();
 	PUBKEY ret;
 	sscanf(ret_str.c_str(), "Public-Key: (%d bit)", &ret.bits);
 	sscanf(ret_str.substr(ret_str.find("Exponent: ")).c_str(), 
@@ -39,20 +45,37 @@ PUBKEY parsePublicKey(std::string pubkey) {
 	return ret;
 }
 #include<iostream>
-std::pair<BigInteger, BigInteger> factorize(BigInteger a) {
-	std::string url = "www.factordb.com";
+pair<BigInteger, BigInteger> factorize(BigInteger a) {
+	string pq[2];
+	string url = "www.factordb.com";
 	RemoteSession factordb = remote(url, 80);
-	std::string query = "GET /index.php?query=";
-	query += a.toString();
-	query += " HTTP/1.1\r\nHost: factordb.com\r\nAccept: text\r\nConnection: Close\r\n\r\n";
-	factordb.send(query);
-	std::string meta = factordb.recv();
-	return std::pair<BigInteger, BigInteger>(
-		meta.substr(
+	while (factordb.isClosed())factordb = remote(url, 80);
+	HTTPRequest *req = new GETRequest("factordb.com", "/index.php?query=" + a.toString());
+	(*req)["Connection"] = "keep-alive";
+	factordb.send(req->toString());
+	string meta = factordb.recv();
+	//factordb.close();
+	HTTPResponse res = parseResponse(meta);
+	meta = res.body;
 
-		),
-		meta.substr(
-
-		)
-	);
+	smatch result; vector<string>num;
+	while (regex_search(meta, result, regex("index\\.php\\?id\\=([0-9]+)"))) {
+		num.push_back(result[1].str());
+		meta = result.suffix().str();
+	}
+	for (int i = 1; i <= 2; i++) {
+		//RemoteSession factordb = remote(url, 80);
+		//while (factordb.isClosed())factordb = remote(url, 80);
+		HTTPRequest *req = new GETRequest("factordb.com", "/index.php?id=" + num[i]);
+		(*req)["Connection"] = "keep-alive";
+		factordb.send(req->toString());
+		meta = factordb.recv();
+		HTTPResponse res = parseResponse(meta);
+		meta = res.body;
+		regex_search(meta, result, regex("value=\\\"([0-9]+)\\\""));
+		pq[i - 1] = result[1].str();
+		//factordb.close();
+	}
+	if (pq[0] == pq[1])return pair<BigInteger, BigInteger>(0, 0);
+	return std::pair<BigInteger, BigInteger>(pq[0], pq[1]);
 }

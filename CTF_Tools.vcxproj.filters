@@ -57,14 +57,17 @@
     <ClCompile Include="TubeExamples.cpp">
       <Filter>源文件\Examples</Filter>
     </ClCompile>
-    <ClCompile Include="FormatStringBuilder.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="RSACipher.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
+    <ClCompile Include="CipherExamples.cpp">
+      <Filter>源文件\Examples</Filter>
+    </ClCompile>
     <ClCompile Include="HTTPToolkit.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\libcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="FormatStringBuilder.cpp">
+      <Filter>源文件\libcpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

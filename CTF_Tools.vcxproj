@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="BigTypes.cpp" />
     <ClCompile Include="CaesarCipher.cpp" />
+    <ClCompile Include="CipherExamples.cpp" />
     <ClCompile Include="FormatStringBuilder.cpp" />
     <ClCompile Include="HTTPToolkit.cpp" />
     <ClCompile Include="Logger.cpp" />

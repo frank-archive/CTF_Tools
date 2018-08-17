@@ -1,10 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
-#include"Tube.h"
-using namespace std;
+#include<regex>
 
-int tmain() {
+extern void RSAExamples();
+extern void BigTypesExamples();
+extern void TubesExamples();
+
+using namespace std;
+int main() {
 	//happy hacking!
+	//if u want to check on examples, call the extern funcs
 	//please open this project with Visual Studio
 	//    (latest version) for (maybe) a fine experience
 	//currently supported functions:
@@ -15,9 +20,9 @@ int tmain() {
 	//4/  Serveral Encodings
 	//5/  Logger support, keep yourself informed on which
 	//    step your kit is working on
+	//6/  RSA Public Key Parse AND <N factorization>!
+	//    with factordb(more in examples)
 
-	//TODO list:
-	//1/  
-
-	return 0;
+	//there are funtions under development. update your resporitry once a while!
+	
 }

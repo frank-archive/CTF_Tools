@@ -28,13 +28,12 @@ RemoteSession::RemoteSession(std::string host, int port) {
 		tlog.error("connect failed...destructing\n");
 		return;
 	}
+	closed = false;
 	tlog.success("Open connection to %s on port %d done\n", host.c_str(), port);
 }
 
 RemoteSession::~RemoteSession() {
-	if (WSAStarted == true)
-		WSACleanup(), WSAStarted = false;
-	closesocket(sock);
+	close();
 }
 
 void RemoteSession::interactive() {
@@ -128,8 +127,14 @@ void RemoteSession::sendline(std::string data) {
 }
 
 void RemoteSession::close() {
-	Logger tlog;
-	tlog.info("you actually needn't call this function...\n");
+	if (WSAStarted == true)
+		WSACleanup(), WSAStarted = false;
+	closesocket(sock);
+	closed = true;
+}
+
+bool RemoteSession::isClosed() {
+	return closed;
 }
 
 RemoteSession remote(std::string addr, int port) {
