@@ -11,8 +11,8 @@
 请使用最新版VS以获得一般的使用体验
 （不用ide就是噩梦级别的使用体验）
 ```
-//happy hacking!
 	//if u want to check on examples, call the extern funcs
+	//    in main.cpp
 	//please open this project with Visual Studio
 	//    (latest version) for (maybe) a fine experience
 	//currently supported functions:
