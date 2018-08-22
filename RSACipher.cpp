@@ -5,47 +5,97 @@
 #include"HTTPToolkit.h"
 #include<regex>
 #include<vector>
+#include<unordered_map>
 using namespace std;
 
-//MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdP8cq736Eu69XH3KniBozD0dyrafW5D+8KcWhrEpM+NJ5wx2uWRTHTxzgHUMqfTwveBNaWM7ayQbUhatqZYDeJQGrpexp+N46C9nYV3kUmi9SFe8w3JOy6VBFw6s/zP2OGWwGMeZ5AcxIprevnwVHAwdqjYKGm9/s2zIOaOPA7QIDAQAB
+//pub MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdP8cq736Eu69XH3KniBozD0dyrafW5D+8KcWhrEpM+NJ5wx2uWRTHTxzgHUMqfTwveBNaWM7ayQbUhatqZYDeJQGrpexp+N46C9nYV3kUmi9SFe8w3JOy6VBFw6s/zP2OGWwGMeZ5AcxIprevnwVHAwdqjYKGm9/s2zIOaOPA7QIDAQAB
 
-/*
-Public-Key: (1024 bit)
-Modulus:
-00:dd:3f:c7:2a:ef:7e:84:bb:af:57:1f:72:a7:88:
-1a:33:0f:47:72:ad:a7:d6:e4:3f:bc:29:c5:a1:ac:
-4a:4c:f8:d2:79:c3:1d:ae:59:14:c7:4f:1c:e0:1d:
-43:2a:7d:3c:2f:78:13:5a:58:ce:da:c9:06:d4:85:
-ab:6a:65:80:de:25:01:ab:a5:ec:69:f8:de:3a:0b:
-d9:d8:57:79:14:9a:2f:52:15:ef:30:dc:93:b2:e9:
-50:45:c3:ab:3f:cc:fd:8e:19:6c:06:31:e6:79:01:
-cc:48:a6:b7:af:9f:05:47:03:07:6a:8d:82:86:9b:
-df:ec:db:32:0e:68:e3:c0:ed
-Exponent: 65537 (0x10001)
-Modulus=DD3FC72AEF7E84BBAF571F72A7881A330F4772ADA7D6E43FBC29C5A1AC4A4CF8D279C31DAE5914C74F1CE01D432A7D3C2F78135A58CEDAC906D485AB6A6580DE2501ABA5EC69F8DE3A0BD9D85779149A2F5215EF30DC93B2E95045C3AB3FCCFD8E196C0631E67901CC48A6B7AF9F054703076A8D82869BDFECDB320E68E3C0ED
-*/
 
+static BigInteger convertOpensslNum(string num) {
+	while (!isalnum(num[0]))num = num.substr(1);
+	string build; int i = 0; bool isHex = false;
+	while (num[i] == '0' || num[i] == ':')i++;
+	for (int i = 0; i < num.size(); i++) {
+		if (num[i] == ':')isHex = true;
+		else if (num[i] == ' ' || num[i] == '\n')
+			continue;
+		else if (num[i] == '(')break;
+		else build += num[i];
+	}
+	while (build[0] == '0')build = build.substr(1);
+	if (isHex)return BigInteger(build, 16);
+	else return BigInteger(build, 10);
+}
+unordered_map<string, BigInteger> parseObj(string str) {
+	unordered_map<string, BigInteger>obj_map;
+	smatch result; pair<string, BigInteger>obj;
+	regex_search(str, result, regex("(?:\\n)\\w+"));
+	string bits_source = result.prefix().str(); int bits_ext;
+	bits_source = bits_source.substr(bits_source.find("("));
+	sscanf(bits_source.c_str(), "(%dbit)", &bits_ext);
+	obj_map["bits"] = bits_ext;
+	str = result[0].str() + result.suffix().str();
+	regex_search(str, result, regex("(?:\\n)\\w+"));
+	obj.first = result[0].str().substr(1);
+	str = result.suffix();
+	while (regex_search(str, result, regex("(?:\\n)\\w+"))) {
+		obj.second = convertOpensslNum(result.prefix().str().substr(1));
+		obj_map[obj.first] = obj.second;
+		obj.first = result[0].str().substr(1);
+		str = result.suffix();
+	}
+	obj.second = convertOpensslNum(str);
+	obj_map[obj.first] = obj.second;
+	return obj_map;
+}
+#include<iostream>
 //please erase the line breaks before calling this function
 PUBKEY parsePublicKey(string pubkey) {
-	string p, q;
-
 	Logger tlog; tlog.debug("requesting PUBKEY parse\n");
 	RemoteSession a = remote("service.std-frank.club", 7456);
 	a.sendline(string("pub ") + pubkey);
 	tlog.debug("request sent...recving...\n");
 	string ret_str = a.recvall();
-	PUBKEY ret;
-	sscanf(ret_str.c_str(), "Public-Key: (%d bit)", &ret.bits);
-	sscanf(ret_str.substr(ret_str.find("Exponent: ")).c_str(), 
-		"Exponent: %d (", &ret.publicExponent);
+	if (ret_str.find("unable") != -1)return PUBKEY();
 
-	ret.modulus =
-		BigInteger(ret_str.substr(ret_str.find("Modulus=") + 8,
-			ret_str.find("---") - ret_str.find("Modulus=") - 8), 16);
+	PUBKEY ret;
+	unordered_map<string, BigInteger>obj_map = parseObj(ret_str);
+	if (obj_map.find("Modulus") == obj_map.end() ||
+		obj_map.find("bits") == obj_map.end())
+		return PUBKEY();
+	ret.bits = obj_map["bits"].toInt();
+	ret.modulus = obj_map["Modulus"];
+	ret.publicExponent = obj_map["Exponent"];
 	return ret;
 }
-#include<iostream>
+
+//please erase the line breaks before calling this function
+PRIVKEY parsePrivateKey(std::string privkey) {
+	Logger tlog; tlog.debug("requesting PIRVKEY parse\n");
+	RemoteSession a = remote("service.std-frank.club", 7456);
+	a.sendline(string("priv ") + privkey);
+	tlog.debug("request sent...recving...\n");
+	string ret_str = a.recvall();
+	if (ret_str.find("unable") != -1)return PRIVKEY();
+
+	PRIVKEY ret;
+	unordered_map<string, BigInteger>obj_map = parseObj(ret_str);
+	if (obj_map.find("modulus") == obj_map.end() ||
+		obj_map.find("bits") == obj_map.end())
+		return PRIVKEY();
+	ret.bits = obj_map["bits"].toInt();
+	ret.modulus = obj_map["modulus"];
+	ret.publicExponent = obj_map["publicExponent"];
+	ret.privateExponent = obj_map["privateExponent"];
+	ret.prime1 = obj_map["prime1"];
+	ret.prime2 = obj_map["prime2"];
+	ret.exponent1 = obj_map["exponent1"];
+	ret.exponent2 = obj_map["exponent2"];
+	ret.coefficent = obj_map["coefficent"];
+	return ret;
+}
 pair<BigInteger, BigInteger> factorize(BigInteger a) {
+	Logger tlog; tlog.debug("requesting n factorization\n");
 	string pq[2];
 	string url = "www.factordb.com";
 	RemoteSession factordb = remote(url, 80);
@@ -77,5 +127,6 @@ pair<BigInteger, BigInteger> factorize(BigInteger a) {
 		//factordb.close();
 	}
 	if (pq[0] == pq[1])return pair<BigInteger, BigInteger>(0, 0);
+	tlog.debug("success\n");
 	return std::pair<BigInteger, BigInteger>(pq[0], pq[1]);
 }

@@ -2,6 +2,7 @@
 #include<climits>
 #include<stack>
 #include<utility>
+#include<sstream>
 
 template<typename type>
 void swap(type &a, type &b) {
@@ -177,5 +178,12 @@ std::string BigInteger::toString(short radix) {
 			return ret;
 		}
 	}
+	return ret;
+}
+
+int BigInteger::toInt() {
+	int ret;
+	std::istringstream sin(toString());
+	sin >> ret;
 	return ret;
 }

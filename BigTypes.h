@@ -25,6 +25,7 @@ public:
 
 	void tidy();
 	std::string toString(short radix = 10);
+	int toInt();
 };
 namespace BigFloat {
 	class BigFloat {
