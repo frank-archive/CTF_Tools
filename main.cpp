@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
-#include<regex>
+#include"BaseEncode.h"
 
 extern void RSAExamples();
 extern void BigTypesExamples();
@@ -24,5 +24,5 @@ int main() {
 	//    with factordb(more in examples)
 
 	//there are funtions under development. update your resporitry once a while!
-	RSAExamples();
+	
 }

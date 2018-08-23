@@ -69,6 +69,12 @@
     <ClCompile Include="FormatStringBuilder.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
+    <ClCompile Include="BaseEncode.cpp">
+      <Filter>源文件\libcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="algo_ext.cpp">
+      <Filter>源文件\libcpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logger.h">
@@ -97,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="HTTPToolkit.h">
       <Filter>头文件\WEB</Filter>
+    </ClInclude>
+    <ClInclude Include="algo_ext.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

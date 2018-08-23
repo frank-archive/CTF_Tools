@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="algo_ext.cpp" />
+    <ClCompile Include="BaseEncode.cpp" />
     <ClCompile Include="BigTypes.cpp" />
     <ClCompile Include="CaesarCipher.cpp" />
     <ClCompile Include="CipherExamples.cpp" />
@@ -39,6 +41,7 @@
     <ClCompile Include="BigTypesExample.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="algo_ext.h" />
     <ClInclude Include="BaseEncode.h" />
     <ClInclude Include="BigTypes.h" />
     <ClInclude Include="CaesarCipher.h" />
