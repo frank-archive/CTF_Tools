@@ -45,9 +45,6 @@
     <ClCompile Include="CaesarCipher.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
-    <ClCompile Include="UrlEncode.cpp">
-      <Filter>源文件\libcpp</Filter>
-    </ClCompile>
     <ClCompile Include="BigTypesExample.cpp">
       <Filter>源文件\Examples</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
     <ClCompile Include="BaseEncoding.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
+    <ClCompile Include="UrlEncoding.cpp">
+      <Filter>源文件\libcpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logger.h">
@@ -87,9 +87,6 @@
       <Filter>头文件\MISC</Filter>
     </ClInclude>
     <ClInclude Include="RSACipher.h">
-      <Filter>头文件\MISC</Filter>
-    </ClInclude>
-    <ClInclude Include="UrlEncode.h">
       <Filter>头文件\MISC</Filter>
     </ClInclude>
     <ClInclude Include="FormatStringBuilder.h">
@@ -106,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="Tube.h">
       <Filter>头文件\PWN</Filter>
+    </ClInclude>
+    <ClInclude Include="UrlEncoding.h">
+      <Filter>头文件\MISC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

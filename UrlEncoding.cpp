@@ -1,10 +1,10 @@
-#include "UrlEncode.h"
+#include "UrlEncoding.h"
 
-unsigned char ToHex(unsigned char x) {
+static unsigned char ToHex(unsigned char x) {
 	return  x > 9 ? x + 55 : x + 48;
 }
 
-unsigned char FromHex(unsigned char x) {
+static unsigned char FromHex(unsigned char x) {
 	unsigned char y;
 	if (x >= 'A' && x <= 'Z') y = x - 'A' + 10;
 	else if (x >= 'a' && x <= 'z') y = x - 'a' + 10;

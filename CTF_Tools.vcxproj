@@ -37,7 +37,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="TubeExamples.cpp" />
-    <ClCompile Include="UrlEncode.cpp" />
+    <ClCompile Include="UrlEncoding.cpp" />
     <ClCompile Include="BigTypesExample.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -50,7 +50,7 @@
     <ClInclude Include="RSACipher.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />
-    <ClInclude Include="UrlEncode.h" />
+    <ClInclude Include="UrlEncoding.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

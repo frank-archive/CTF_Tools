@@ -5,7 +5,7 @@ static const string base64_chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 "abcdefghijklmnopqrstuvwxyz"
 "0123456789+/";
-int base64_index(const char &a) {
+static int base64_index(const char &a) {
 	if (a >= 'A'&&a <= 'Z')return a - 'A';
 	if (a >= 'a'&&a <= 'z')return a - 'a' + 26;
 	if (a >= '0'&&a <= '9')return a - '0' + 52;
@@ -16,7 +16,7 @@ int base64_index(const char &a) {
 static const string base32_chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 "234567";
-int base32_index(const char &a) {
+static int base32_index(const char &a) {
 	if (a >= 'A'&&a <= 'Z')return a - 'A';
 	if (a >= '2'&&a <= '7')return a - '2' + 26;
 	if (a == '=')return 0;
@@ -25,7 +25,7 @@ int base32_index(const char &a) {
 static const string base16_chars =
 "0123456789"
 "ABCDEF";
-int base16_index(const char &a) {
+static int base16_index(const char &a) {
 	if (a >= '0'&&a <= '9')return a - '0';
 	if (a >= 'A'&&a <= 'F')return a - 'A' + 10;
 	return -1;
