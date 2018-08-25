@@ -1,8 +1,9 @@
 #pragma once
 #include<string>
 #include<map>
+#include<vector>
 struct HTTPRequest {//HTTP/1.1  CONSTRUCTOR
-	std::map<std::string, std::string>table;
+	std::map<std::string, std::string> table;
 	std::string constructHeader();
 	std::string &operator [](std::string key);
 	virtual std::string toString() = 0;

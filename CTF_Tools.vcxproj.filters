@@ -69,10 +69,10 @@
     <ClCompile Include="FormatStringBuilder.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
-    <ClCompile Include="BaseEncode.cpp">
+    <ClCompile Include="algo_ext.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
-    <ClCompile Include="algo_ext.cpp">
+    <ClCompile Include="BaseEncoding.cpp">
       <Filter>源文件\libcpp</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="BigTypes.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseEncode.h">
-      <Filter>头文件\MISC</Filter>
     </ClInclude>
     <ClInclude Include="CaesarCipher.h">
       <Filter>头文件\MISC</Filter>
@@ -98,14 +95,17 @@
     <ClInclude Include="FormatStringBuilder.h">
       <Filter>头文件\PWN</Filter>
     </ClInclude>
-    <ClInclude Include="Tube.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="HTTPToolkit.h">
       <Filter>头文件\WEB</Filter>
     </ClInclude>
     <ClInclude Include="algo_ext.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEncoding.h">
+      <Filter>头文件\MISC</Filter>
+    </ClInclude>
+    <ClInclude Include="Tube.h">
+      <Filter>头文件\PWN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

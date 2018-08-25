@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
-#include"BaseEncode.h"
+#include"BaseEncoding.h"
 
 extern void RSAExamples();
 extern void BigTypesExamples();
@@ -24,5 +24,8 @@ int main() {
 	//    with factordb(more in examples)
 
 	//there are funtions under development. update your resporitry once a while!
+	cout << base64::b64decode(base64::b64encode("asdf"));
 	
+	for (int i = 32; i < 128; i++)
+		cout << i << ":" << (char)i << endl;
 }
