@@ -48,6 +48,7 @@
     <ClInclude Include="FormatStringBuilder.h" />
     <ClInclude Include="HTTPToolkit.h" />
     <ClInclude Include="RSACipher.h" />
+    <ClInclude Include="SqliConstructor.h" />
     <ClInclude Include="Tube.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="UrlEncoding.h" />

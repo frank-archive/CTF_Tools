@@ -24,4 +24,6 @@ int main() {
 	//    with factordb(more in examples)
 
 	//there are funtions under development. update your resporitry once a while!
+	for (int i = 32; i <= 128; i++)
+		cout << i << ":" << char(i) << endl;
 }

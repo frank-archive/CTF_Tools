@@ -73,7 +73,7 @@ BigInteger operator*(BigInteger & a, long b) {
 	return ret;
 }
 
-std::pair<BigInteger, long>div_mod(BigInteger &a, long b) {
+static std::pair<BigInteger, long>div_mod(BigInteger &a, long b) {
 	long long temp = 0; BigInteger ret;
 	ret.ST_BASE = a.ST_BASE;
 	std::stack<short>rts;
@@ -96,7 +96,7 @@ long operator%(BigInteger & a, long b) {
 	return div_mod(a, b).second;
 }
 
-//ÄæÐòreversed
+//reversed
 std::vector<short> BigInteger::toBase(short base) {
 	BigInteger temp = *this; std::vector<short>ret;
 	std::pair<BigInteger, long>rts;

@@ -56,7 +56,7 @@ PUBKEY parsePublicKey(string pubkey) {
 	a.sendline(string("pub ") + pubkey);
 	tlog.debug("request sent...recving...\n");
 	string ret_str = a.recvall();
-	if (ret_str.find("unable") != -1)return PUBKEY();
+	if (ret_str.find("unable") != string::npos)return PUBKEY();
 
 	PUBKEY ret;
 	unordered_map<string, BigInteger>obj_map = parseObj(ret_str);
@@ -76,7 +76,7 @@ PRIVKEY parsePrivateKey(std::string privkey) {
 	a.sendline(string("priv ") + privkey);
 	tlog.debug("request sent...recving...\n");
 	string ret_str = a.recvall();
-	if (ret_str.find("unable") != -1)return PRIVKEY();
+	if (ret_str.find("unable") != string::npos)return PRIVKEY();
 
 	PRIVKEY ret;
 	unordered_map<string, BigInteger>obj_map = parseObj(ret_str);

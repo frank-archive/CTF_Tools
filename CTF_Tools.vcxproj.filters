@@ -107,5 +107,8 @@
     <ClInclude Include="UrlEncoding.h">
       <Filter>头文件\MISC</Filter>
     </ClInclude>
+    <ClInclude Include="SqliConstructor.h">
+      <Filter>头文件\WEB</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

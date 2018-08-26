@@ -5,31 +5,12 @@ static const string base64_chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 "abcdefghijklmnopqrstuvwxyz"
 "0123456789+/";
-static int base64_index(const char &a) {
-	if (a >= 'A'&&a <= 'Z')return a - 'A';
-	if (a >= 'a'&&a <= 'z')return a - 'a' + 26;
-	if (a >= '0'&&a <= '9')return a - '0' + 52;
-	if (a == '+')return 63; if (a == '/')return 64;
-	if (a == '=')return 0;
-	return -1;
-}
 static const string base32_chars =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 "234567";
-static int base32_index(const char &a) {
-	if (a >= 'A'&&a <= 'Z')return a - 'A';
-	if (a >= '2'&&a <= '7')return a - '2' + 26;
-	if (a == '=')return 0;
-	return -1;
-}
 static const string base16_chars =
 "0123456789"
 "ABCDEF";
-static int base16_index(const char &a) {
-	if (a >= '0'&&a <= '9')return a - '0';
-	if (a >= 'A'&&a <= 'F')return a - 'A' + 10;
-	return -1;
-}
 
 static string enmap(string &arr, const int targ_bit) {
 	int fillbit = 0;
@@ -82,7 +63,8 @@ string base64::b64encode(string txt) {
 }
 string base64::b64decode(string enc) {
 	for (int i = 0; i < enc.size(); i++) {
-		enc[i] = base64_index(enc[i]);
+		if (enc[i] == '=')enc[i] = 0;
+		else enc[i] = base64_chars.find(enc[i]);
 		if (enc[i] == -1)
 			return "not base64 encoded string";
 	}
@@ -100,7 +82,8 @@ string base64::b32encode(string txt) {
 }
 string base64::b32decode(string enc) {
 	for (int i = 0; i < enc.size(); i++) {
-		enc[i] = base32_index(enc[i]);
+		if (enc[i] == '=')enc[i] = 0;
+		else enc[i] = base32_chars.find(enc[i]);
 		if (enc[i] == -1)
 			return "not base64 encoded string";
 	}
@@ -118,7 +101,7 @@ string base64::b16encode(string txt) {
 }
 string base64::b16decode(string enc) {
 	for (int i = 0; i < enc.size(); i++) {
-		enc[i] = base16_index(enc[i]);
+		enc[i] = base16_chars.find(enc[i]);
 		if (enc[i] == -1)
 			return "not base64 encoded string";
 	}
