@@ -16,20 +16,4 @@ std::string Caesar::roll(int key){
 
 Caesar::Caesar(std::string txt) :text(txt) {}
 
-std::string Caesar::operator++() {
-	return roll(1);
-}
-
-std::string Caesar::operator--() {
-	return roll(-1);
-}
-
-std::string Caesar::operator+=(int bias) {
-	return roll(bias);
-}
-
-std::string Caesar::operator-=(int bias) {
-	return roll(-bias);
-}
-
 std::string Caesar::operator=(std::string txt) { text = txt; return text; }

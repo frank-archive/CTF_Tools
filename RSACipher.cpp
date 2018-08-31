@@ -26,7 +26,7 @@ static BigInteger convertOpensslNum(string num) {
 	if (isHex)return BigInteger(build, 16);
 	else return BigInteger(build, 10);
 }
-unordered_map<string, BigInteger> parseObj(string str) {
+static unordered_map<string, BigInteger> parseObj(string str) {
 	unordered_map<string, BigInteger>obj_map;
 	smatch result; pair<string, BigInteger>obj;
 	regex_search(str, result, regex("(?:\\n)\\w+"));

@@ -5,6 +5,7 @@
 extern void RSAExamples();
 extern void BigTypesExamples();
 extern void TubesExamples();
+extern void CipherExamples();
 
 using namespace std;
 int main() {
@@ -23,7 +24,8 @@ int main() {
 	//6/  RSA Public Key Parse AND <N factorization>!
 	//    with factordb(more in examples)
 
+	//tip:to inject some varible into a string, make good use of format string
+
 	//there are funtions under development. update your resporitry once a while!
-	for (int i = 32; i <= 128; i++)
-		cout << i << ":" << char(i) << endl;
+	
 }
