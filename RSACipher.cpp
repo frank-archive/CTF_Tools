@@ -130,3 +130,10 @@ pair<BigInteger, BigInteger> factorize(BigInteger a) {
 	tlog.debug("success\n");
 	return std::pair<BigInteger, BigInteger>(pq[0], pq[1]);
 }
+
+void RSAencode(FILE * file, PUBKEY key) {
+	char buffer[2048]; fscanf(file, "%s", buffer);
+	RemoteSession encoder = remote("service.std-frank.club", 7456);
+	encoder.sendline(buffer);
+
+}

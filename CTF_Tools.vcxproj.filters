@@ -28,6 +28,9 @@
     <Filter Include="头文件\WEB">
       <UniqueIdentifier>{1c107406-f0cd-4253-8932-34630308e6fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="moectf partial wp">
+      <UniqueIdentifier>{f97a6e10-8303-4ecd-9ef9-c67c60b57c53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,15 @@
     </ClCompile>
     <ClCompile Include="UrlEncoding.cpp">
       <Filter>源文件\libcpp</Filter>
+    </ClCompile>
+    <ClCompile Include="hong_kong_journalist.cpp">
+      <Filter>moectf partial wp</Filter>
+    </ClCompile>
+    <ClCompile Include="ha.cpp">
+      <Filter>moectf partial wp</Filter>
+    </ClCompile>
+    <ClCompile Include="repeater0.cpp">
+      <Filter>moectf partial wp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

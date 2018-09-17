@@ -41,6 +41,8 @@ POSTRequest::POSTRequest(
 string POSTRequest::toString() {
 	if (target == "")target = "/";
 	string res = "POST " + target + " HTTP/1.1\r\n";
+	table["Content-Length"] = to_string(body.size());
+	table["Content-Type"] = "application/x-www-form-urlencoded";
 	res += constructHeader(); res += body;
 	return res;
 }

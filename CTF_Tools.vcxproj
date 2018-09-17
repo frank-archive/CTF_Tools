@@ -19,15 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ha.cpp" />
     <ClCompile Include="algo_ext.cpp" />
     <ClCompile Include="BaseEncoding.cpp" />
     <ClCompile Include="BigTypes.cpp" />
     <ClCompile Include="CaesarCipher.cpp" />
     <ClCompile Include="CipherExamples.cpp" />
     <ClCompile Include="FormatStringBuilder.cpp" />
+    <ClCompile Include="hong_kong_journalist.cpp" />
     <ClCompile Include="HTTPToolkit.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="repeater0.cpp" />
     <ClCompile Include="RSACipherExamples.cpp" />
     <ClCompile Include="RSACipher.cpp" />
     <ClCompile Include="Tube.cpp">

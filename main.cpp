@@ -1,14 +1,23 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
-#include"BaseEncoding.h"
 
 extern void RSAExamples();
 extern void BigTypesExamples();
 extern void TubesExamples();
 extern void CipherExamples();
 
+extern int RE0_main();
+extern int HK_main();
+extern int HA_main();
+
 using namespace std;
 int main() {
+	cout << "dealing with \"ha\":" << endl;
+	HA_main(); cout << endl;
+	cout << "dealing with repeater0:" << endl;
+	RE0_main(); cout << endl;
+	cout << "dealing with 管理员钦定给了香港记者?:" << endl;
+	HK_main();
 	//happy hacking!
 	//if u want to check on examples, call the extern funcs
 	//please open this project with Visual Studio

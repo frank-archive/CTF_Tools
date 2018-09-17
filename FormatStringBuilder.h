@@ -2,7 +2,7 @@
 //不会写，大佬救救我Orz
 #include<string>
 enum type {
-	ADDR, LNG, FLT, STR
+	ADDR, INTEGER, FLAT, STR
 };
 class FSBuilder {
 	const char *index[100] = { "$p\0","$d\0","$f\0","$s\0" };
