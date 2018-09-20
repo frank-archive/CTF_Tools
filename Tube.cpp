@@ -5,8 +5,14 @@
 using namespace std;
 bool WSAStarted;
 WSADATA w_data;
+static Logger::LogLevel LogLev = Logger::INFO;
+
+void setTubeLogLevel(int l) {
+	LogLev = (Logger::LogLevel)l;
+}
+
 RemoteSession::RemoteSession(std::string host, int port) {
-	Logger tlog;
+	Logger tlog; tlog.setLevel(LogLev);
 	tlog.progress("Opening connection to %s on port %d\n", host.c_str(), port);
 	if (WSAStarted == false)
 		WSAStartup(MAKEWORD(2, 2), &w_data), WSAStarted = true;
@@ -26,6 +32,7 @@ RemoteSession::RemoteSession(std::string host, int port) {
 	if (connect(sock, (SOCKADDR*)&addrServ, sizeof(addrServ)) == SOCKET_ERROR) {
 		RemoteSession::~RemoteSession();
 		tlog.error("connect failed...destructing\n");
+		throw exception("connection failed");
 		return;
 	}
 	closed = false;
@@ -49,7 +56,8 @@ void RemoteSession::interactive() {
 }
 
 std::string RemoteSession::recv(int bytes, time_t timeout){
-	Logger tlog; tlog.debug("recieving data\n");
+	Logger tlog; tlog.setLevel(LogLev);
+	tlog.debug("recieving data\n");
 	if (timeout != 0)//set socket recv timeout
 		setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
 
@@ -60,6 +68,7 @@ std::string RemoteSession::recv(int bytes, time_t timeout){
 		delete buffer;
 		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
+		throw exception("connection refused");
 		return std::string();
 	}
 	tlog.debug("data recieved %d bytes\n", recieved_bytes);
@@ -69,7 +78,8 @@ std::string RemoteSession::recv(int bytes, time_t timeout){
 }
 
 std::string RemoteSession::recvall(time_t timeout) {
-	Logger tlog; tlog.debug("recieving all data\n");
+	Logger tlog; tlog.setLevel(LogLev); 
+	tlog.debug("recieving all data\n");
 	if (timeout != 0)
 		setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
 
@@ -84,14 +94,16 @@ std::string RemoteSession::recvall(time_t timeout) {
 	if (recv_ret == SOCKET_ERROR) {
 		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
-		return std::string();
+		throw exception("connection refused");
+		return std::string("error");
 	}
 	tlog.debug("data recieved %d btyes\n", recieved_bytes);
 	return message;
 }
 
 std::string RemoteSession::recvline(bool keepends) {
-	Logger tlog; tlog.debug("recieving a line of data\n");
+	Logger tlog; tlog.setLevel(LogLev); 
+	tlog.debug("recieving a line of data\n");
 	char buffer; int recv_ret; string message;
 	while ((recv_ret = ::recv(sock, &buffer, 1, 0)) > 0) {
 		if (buffer == '\n')break;
@@ -100,6 +112,7 @@ std::string RemoteSession::recvline(bool keepends) {
 	if (recv_ret == SOCKET_ERROR) {
 		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
+		throw exception("connection refused");
 		return std::string();
 	}
 	tlog.debug("data recieved %d btyes\n", message.size());
@@ -108,18 +121,22 @@ std::string RemoteSession::recvline(bool keepends) {
 }
 
 void RemoteSession::send(std::string data){
-	Logger tlog; tlog.debug("sending data\n");
+	Logger tlog; tlog.setLevel(LogLev); 
+	tlog.debug("sending data\n");
 	if (::send(sock, data.c_str(), data.size(), 0) == SOCKET_ERROR) {
 		tlog.error("connection closed by server...destructing\n");
 		RemoteSession::~RemoteSession();
+		throw exception("connection refused");
 		return;
 	}
 	tlog.debug("message sent\n");
+	Sleep(120);
 	return;
 }
 
 void RemoteSession::sendline(std::string data) {
-	Logger tlog; tlog.debug("sending a line of data\n");
+	Logger tlog; tlog.setLevel(LogLev); 
+	tlog.debug("sending a line of data\n");
 	if(data[data.size()-1]!='\n')data+='\n';
 	tlog.debug("calling send function\n");
 	send(data);

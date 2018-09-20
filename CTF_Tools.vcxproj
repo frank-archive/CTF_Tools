@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cirno.cpp" />
+    <ClCompile Include="ECB_Attack.cpp" />
     <ClCompile Include="ha.cpp" />
     <ClCompile Include="algo_ext.cpp" />
     <ClCompile Include="BaseEncoding.cpp" />
@@ -30,9 +32,11 @@
     <ClCompile Include="HTTPToolkit.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PHPTricks.cpp" />
     <ClCompile Include="repeater0.cpp" />
     <ClCompile Include="RSACipherExamples.cpp" />
     <ClCompile Include="RSACipher.cpp" />
+    <ClCompile Include="TrueOrFalse.cpp" />
     <ClCompile Include="Tube.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
@@ -50,6 +54,7 @@
     <ClInclude Include="CaesarCipher.h" />
     <ClInclude Include="FormatStringBuilder.h" />
     <ClInclude Include="HTTPToolkit.h" />
+    <ClInclude Include="PHPTricks.h" />
     <ClInclude Include="RSACipher.h" />
     <ClInclude Include="SqliConstructor.h" />
     <ClInclude Include="Tube.h" />

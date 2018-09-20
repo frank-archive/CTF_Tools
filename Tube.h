@@ -2,10 +2,14 @@
 #include<string>
 #include<WinSock2.h>
 #pragma comment(lib,"Ws2_32.lib ")
+
+void setTubeLogLevel(int l);
+
 class RemoteSession {
 	SOCKET sock;
 	bool closed;
 public:
+
 	RemoteSession(std::string host, int port);
 	~RemoteSession();
 	void interactive();

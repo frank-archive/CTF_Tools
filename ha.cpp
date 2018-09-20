@@ -2,7 +2,7 @@
 #include"Tube.h"
 
 using namespace std;
-int HA_main() {
+string HA_main() {
 	string afds;
 	string a = "";
 	for (int j = 0; j < 76; j++)a += '\0';
@@ -12,6 +12,6 @@ int HA_main() {
 	ses.sendline(a);
 	Sleep(200);
 	afds = ses.recv();
-	cout << afds;
-	return 0;
+	afds = afds.substr(0, afds.find("}") + 1);
+	return afds;
 }

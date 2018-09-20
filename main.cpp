@@ -1,23 +1,34 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+#include<vector>
+#include<string>
 
 extern void RSAExamples();
 extern void BigTypesExamples();
 extern void TubesExamples();
 extern void CipherExamples();
 
-extern int RE0_main();
-extern int HK_main();
-extern int HA_main();
-
 using namespace std;
+
+extern string RE0_main();
+extern string HK_main();
+extern string HA_main();
+extern string ECB_Atack_main();
+extern string Cirno_main();
+extern string TOF_main();
+
 int main() {
-	cout << "dealing with \"ha\":" << endl;
-	HA_main(); cout << endl;
-	cout << "dealing with repeater0:" << endl;
-	RE0_main(); cout << endl;
-	cout << "dealing with 管理员钦定给了香港记者?:" << endl;
-	HK_main();
+	vector<string> flags;
+	string names[] = { "Cirno","ha","repeater0","HK_journalist","ECB_Attack", "True_or_False" };
+	cout << "dealing with Cirno:" << endl << (flags.push_back(Cirno_main()), flags[0]) << endl;
+	cout << "dealing with \"ha\":" << endl << (flags.push_back(HA_main()), flags[1]) << endl;
+	cout << "dealing with repeater0:" << endl << (flags.push_back(RE0_main()),flags[2]) << endl;
+	cout << "dealing with 管理员钦定给了香港记者?:" << endl<< (flags.push_back(HK_main()),flags[3]) << endl;
+	cout << "dealing with ECB_Attack:" << endl << (flags.push_back(ECB_Atack_main()), flags[4]) << endl;
+	cout << "dealing with True or False:" << endl << (flags.push_back(TOF_main()), flags[5]) << endl;
+	
+	for (int i = 0; i < flags.size(); i++)
+		cout << names[i] << ":" << flags[i] << endl;
+
 	//happy hacking!
 	//if u want to check on examples, call the extern funcs
 	//please open this project with Visual Studio
