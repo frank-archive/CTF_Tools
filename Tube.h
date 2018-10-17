@@ -14,6 +14,8 @@ public:
 	~RemoteSession();
 	void interactive();
 
+	std::wstring wrecv(int bytes = 4096, time_t timeout = 0);
+
 	std::string recv(int bytes = 4096, time_t timeout = 0);
 	std::string recvall(time_t timeout = 0);
 	std::string recvline(bool keepends = true);

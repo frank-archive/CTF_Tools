@@ -5,7 +5,7 @@
 using namespace std;
 bool WSAStarted;
 WSADATA w_data;
-static Logger::LogLevel LogLev = Logger::INFO;
+static Logger::LogLevel LogLev = Logger::DEBUG;
 
 void setTubeLogLevel(int l) {
 	LogLev = (Logger::LogLevel)l;
@@ -54,7 +54,18 @@ void RemoteSession::interactive() {
 		cout << recvall();
 	}
 }
-
+wchar_t *UTF8ToUnicode(const char* str) {
+	int    textlen = 0;
+	wchar_t * result;
+	textlen = MultiByteToWideChar(CP_UTF8, 0, str, -1, NULL, 0);
+	result = (wchar_t *)malloc((textlen + 1) * sizeof(wchar_t));
+	memset(result, 0, (textlen + 1) * sizeof(wchar_t));
+	MultiByteToWideChar(CP_UTF8, 0, str, -1, (LPWSTR)result, textlen);
+	return    result;
+}
+std::wstring RemoteSession::wrecv(int bytes, time_t timeout) {
+	return UTF8ToUnicode(this->recv().c_str());
+}
 std::string RemoteSession::recv(int bytes, time_t timeout){
 	Logger tlog; tlog.setLevel(LogLev);
 	tlog.debug("recieving data\n");
@@ -89,13 +100,6 @@ std::string RemoteSession::recvall(time_t timeout) {
 		buffer[recv_ret] = 0;
 		message += buffer; recieved_bytes += recv_ret;
 		memset(buffer, 0, sizeof buffer);
-		if (recv_ret < 4095)break;
-	}
-	if (recv_ret == SOCKET_ERROR) {
-		tlog.error("connection closed by server...destructing\n");
-		RemoteSession::~RemoteSession();
-		throw exception("connection refused");
-		return std::string("error");
 	}
 	tlog.debug("data recieved %d btyes\n", recieved_bytes);
 	return message;

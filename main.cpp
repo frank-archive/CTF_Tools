@@ -1,34 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<vector>
 #include<string>
-
-extern void RSAExamples();
-extern void BigTypesExamples();
-extern void TubesExamples();
-extern void CipherExamples();
-
+#include"HTTPToolkit.h"
+#include"Tube.h"
+#include<cstdio>
 using namespace std;
 
-extern string RE0_main();
-extern string HK_main();
-extern string HA_main();
-extern string ECB_Atack_main();
-extern string Cirno_main();
-extern string TOF_main();
-
 int main() {
-	vector<string> flags;
-	string names[] = { "Cirno","ha","repeater0","HK_journalist","ECB_Attack", "True_or_False" };
-	cout << "dealing with Cirno:" << endl << (flags.push_back(Cirno_main()), flags[0]) << endl;
-	cout << "dealing with \"ha\":" << endl << (flags.push_back(HA_main()), flags[1]) << endl;
-	cout << "dealing with repeater0:" << endl << (flags.push_back(RE0_main()),flags[2]) << endl;
-	cout << "dealing with 管理员钦定给了香港记者?:" << endl<< (flags.push_back(HK_main()),flags[3]) << endl;
-	cout << "dealing with ECB_Attack:" << endl << (flags.push_back(ECB_Atack_main()), flags[4]) << endl;
-	cout << "dealing with True or False:" << endl << (flags.push_back(TOF_main()), flags[5]) << endl;
-	
-	for (int i = 0; i < flags.size(); i++)
-		cout << names[i] << ":" << flags[i] << endl;
+	setlocale(LC_ALL, "chs");
+	RemoteSession test = remote("fanyi.youdao.com", 80);
+	HTTPRequest *ind = new GETRequest("fanyi.youdao.com", "/translate?&doctype=json&type=AUTO&i=car");
+	ind->table["Accept-Charset"] = "ISO-8859-1";
+	test.send(ind->toString());
+	Sleep(1400);
+	//HTTPResponse res = parseResponse(test.recvall());
 
+	wstring res = test.wrecv();
+	res = res.substr(res.find(L"\"tgt\":\"") + 7);
+	res = res.substr(0, res.find(L"\"}]"));
+	wcout << res;
+	/*string result = res.substr(res.find("<ul class=\"dict - basic - ul\">"));
+	result = result.substr(result.find("<strong>")+8);
+	result = result.substr(0, result.find("</strong>"));
+	cout << result;*/
 	//happy hacking!
 	//if u want to check on examples, call the extern funcs
 	//please open this project with Visual Studio
